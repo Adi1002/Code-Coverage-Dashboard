@@ -1,0 +1,159 @@
+{
+  "globalOverview": {
+    "summaryMetrics": {
+      "totalRepositories": { "value": 142, "trend": "+3 this month", "status": "success" },
+      "avgLineCoverage": { "value": 76.8, "target": 80, "status": "success" },
+      "avgBranchCoverage": { "value": 64.2, "target": 70, "status": "default" },
+      "criticalHotspots": { "value": 18, "trend": "Below 50% limit", "status": "error" }
+    },
+    "repositoryHealth": [
+      {
+        "id": "1",
+        "repository": "api-gateway-service",
+        "branch": "MAIN BRANCH",
+        "language": "TypeScript",
+        "lineCoverage": 88,
+        "branchCoverage": 76.2,
+        "trend": "+1.2%",
+        "lastRun": "12m ago"
+      },
+      {
+        "id": "2",
+        "repository": "auth-provider-v2",
+        "branch": "MAIN BRANCH",
+        "language": "Go",
+        "lineCoverage": 42,
+        "branchCoverage": 38.5,
+        "trend": "-4.5%",
+        "lastRun": "1h ago"
+      },
+      {
+        "id": "3",
+        "repository": "data-processing-pipeline",
+        "branch": "MAIN BRANCH",
+        "language": "Python",
+        "lineCoverage": 69,
+        "branchCoverage": 62.0,
+        "trend": "+0.8%",
+        "lastRun": "3h ago"
+      },
+      {
+        "id": "4",
+        "repository": "frontend-core-ui",
+        "branch": "MAIN BRANCH",
+        "language": "TypeScript",
+        "lineCoverage": 93,
+        "branchCoverage": 84.1,
+        "trend": "-0.2%",
+        "lastRun": "45m ago"
+      },
+      {
+        "id": "5",
+        "repository": "inventory-manager",
+        "branch": "MAIN BRANCH",
+        "language": "Java",
+        "lineCoverage": 74,
+        "branchCoverage": 68.8,
+        "trend": "+2.1%",
+        "lastRun": "5h ago"
+      },
+      {
+        "id": "6",
+        "repository": "notification-service",
+        "branch": "MAIN BRANCH",
+        "language": "JavaScript",
+        "lineCoverage": 50,
+        "branchCoverage": 44.2,
+        "trend": "-1.4%",
+        "lastRun": "10m ago"
+      }
+    ],
+    "distribution": [
+      { "range": "0-50%", "count": 18 },
+      { "range": "50-75%", "count": 42 },
+      { "range": "75-90%", "count": 56 },
+      { "range": "90-100%", "count": 26 }
+    ],
+    "topCriticalFiles": [
+      { "filename": "UserSessionManager.go", "module": "AUTH-V2", "coverage": 12 },
+      { "filename": "PaymentGateway.ts", "module": "BILLING", "coverage": 24 },
+      { "filename": "DataMigrator.java", "module": "INVENTORY", "coverage": 31 },
+      { "filename": "ErrorHandler.js", "module": "FRONTEND", "coverage": 35 },
+      { "filename": "Validation.py", "module": "API-SVC", "coverage": 42 }
+    ]
+  },
+  "repositoryDetails": {
+    "repositoryName": "web-service-api",
+    "version": "v2.4.1",
+    "branch": "main",
+    "overview": {
+      "lineCoverage": { "value": 78.4, "trend": "+0.4%", "subtext": "Compared to 78.0% last run" },
+      "branchCoverage": { "value": 64.2, "trend": "-1.2%", "subtext": "Caution: Regression detected" },
+      "linesCovered": { "covered": 12450, "total": 15872, "subtext": "Total valid lines increased by 14" },
+      "branchesCovered": { "covered": 842, "total": 1311, "subtext": "Last run: 12 minutes ago" }
+    },
+    "criticalGaps": [
+      { "filename": "auth_handler.go", "coverage": 42 },
+      { "filename": "payment_gw.go", "coverage": 12 }
+    ],
+    "fileLevelCoverage": [
+      {
+        "id": "f1",
+        "filename": "auth_handler.go",
+        "path": "api/v1/auth_handler.go",
+        "lineCoverage": 42.5,
+        "branchCoverage": 30.0,
+        "linesCovered": 191,
+        "totalLines": 450,
+        "hasDiagnostics": true
+      },
+      {
+        "id": "f2",
+        "filename": "connector.go",
+        "path": "internal/db/connector.go",
+        "lineCoverage": 92.1,
+        "branchCoverage": 88.5,
+        "linesCovered": 111,
+        "totalLines": 120,
+        "hasDiagnostics": false
+      },
+      {
+        "id": "f3",
+        "filename": "validator.ts",
+        "path": "pkg/utils/validator.ts",
+        "lineCoverage": 65.0,
+        "branchCoverage": 52.0,
+        "linesCovered": 55,
+        "totalLines": 85,
+        "hasDiagnostics": false
+      },
+      {
+        "id": "f4",
+        "filename": "order_service.go",
+        "path": "services/order_service.go",
+        "lineCoverage": 78.4,
+        "branchCoverage": 71.2,
+        "linesCovered": 698,
+        "totalLines": 890,
+        "hasDiagnostics": false
+      },
+      {
+        "id": "f5",
+        "filename": "logger.go",
+        "path": "web/middleware/logger.go",
+        "lineCoverage": 100.0,
+        "branchCoverage": 100.0,
+        "linesCovered": 45,
+        "totalLines": 45,
+        "hasDiagnostics": false
+      }
+    ],
+    "runHistory": [
+      { "commit": "8f2a1b3", "dateTime": "2024-03-24 14:20", "author": "jane.doe", "lineCoverage": 78.4, "change": "+0.4%", "status": "PASSED" },
+      { "commit": "4c9d2e1", "dateTime": "2024-03-23 09:15", "author": "bob.smith", "lineCoverage": 78.0, "change": "-1.2%", "status": "FAILED" },
+      { "commit": "1a5b6c7", "dateTime": "2024-03-22 18:45", "author": "jane.doe", "lineCoverage": 79.2, "change": "+0.2%", "status": "PASSED" },
+      { "commit": "9f0e8d7", "dateTime": "2024-03-21 11:30", "author": "dev.ops", "lineCoverage": 79.0, "change": "-0.5%", "status": "PASSED" },
+      { "commit": "d3f2a1b", "dateTime": "2024-03-20 10:00", "author": "john.doe", "lineCoverage": 79.5, "change": "0%", "status": "PASSED" }
+    ]
+  }
+}
