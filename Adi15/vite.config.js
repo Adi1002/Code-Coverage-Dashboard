@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: '/Code-Coverage-Dashboard/',
   server: {
     proxy: {
       // 1. Target One: Routes starting with '/data' go to Port 8000
