@@ -4,12 +4,19 @@ export default async function handler(req, res) {
       "http://ec2-100-24-9-250.compute-1.amazonaws.com/data/repository"
     );
 
-    const data = await response.json();
+    const text = await response.text();
 
-    res.status(200).json(data);
+    return res.status(200).json({
+      status: response.status,
+      ok: response.ok,
+      data: text.substring(0, 1000),
+    });
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
+    console.error(error);
+
+    return res.status(500).json({
+      message: error.message,
+      stack: error.stack,
     });
   }
 }
