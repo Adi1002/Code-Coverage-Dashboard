@@ -31,12 +31,13 @@ const RepositoryHealth = ({data, globalSearch}) => {
             align: 'center',
             sorter: (a, b) => a.lineCoverage - b.lineCoverage,
             render: (coverage) => {
-                return <Progress type="circle" percent={coverage} size={40} strokeColor='#225bc5' />;
+                return <Progress type="circle" percent={coverage} size={50} strokeColor='#225bc5' />;
             },
         },
         {
             title: 'Trend',
             key: 'lineTrend',
+            width: 140,
             render: (_, record) => {
                 // 1. Determine if the text is positive or negative to set the color dynamically
                 const isPositive = !record.lineTrend.startsWith('-');
@@ -45,7 +46,7 @@ const RepositoryHealth = ({data, globalSearch}) => {
                 return (
                     <Space size="small">
                         {/* 2. Render the calculated text (+0.0%) */}
-                        <Text style={{ color: color, fontWeight: 500 }}>{record.lineTrend}</Text>
+                        <Text style={{ color: color, fontWeight: 500, whiteSpace: 'nowrap' }}>{record.lineTrend}</Text>
 
                         {/* 3. The Recharts Sparkline Wrapper */}
                         <div style={{ width: 60, height: 25 }}>
@@ -77,12 +78,13 @@ const RepositoryHealth = ({data, globalSearch}) => {
             align: 'center',
             sorter: (a, b) => a.lineCoverage - b.lineCoverage,
             render: (coverage) => {
-                return <Progress type="circle" percent={coverage} size={40} strokeColor='#22c55e' />;
+                return <Progress type="circle" percent={coverage} size={50} strokeColor='#22c55e' />;
             },
         },
         {
             title: 'Trend',
             key: 'branchTrend',
+            width: 140,
             render: (_, record) => {
                 // 1. Determine if the text is positive or negative to set the color dynamically
                 const isPositive = !record.branchTrend.startsWith('-');
@@ -91,7 +93,7 @@ const RepositoryHealth = ({data, globalSearch}) => {
                 return (
                     <Space size="small">
                         {/* 2. Render the calculated text (+0.0%) */}
-                        <Text style={{ color: color, fontWeight: 500 }}>{record.branchTrend}</Text>
+                        <Text style={{ color: color, fontWeight: 500, whiteSpace: 'nowrap' }}>{record.branchTrend}</Text>
 
                         {/* 3. The Recharts Sparkline Wrapper */}
                         <div style={{ width: 60, height: 25 }}>

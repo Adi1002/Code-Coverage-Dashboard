@@ -48,7 +48,7 @@ const CustomTreemapBox = (props) => {
                         </div>
 
                         <Card variant={false} style={{ borderRadius: '8px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
                                 <Text type="secondary" style={{ fontWeight: 500 }}>COVERAGE TREEMAP (SIZE = LOC)</Text>
                                 <Space>
                                     <Badge color="#ef4444" text={<Text type="secondary" style={{ fontSize: '12px' }}>0-50%</Text>} />
