@@ -4,7 +4,7 @@ import {
 } from '@ant-design/icons';
 
 
-// NEW HELPER: Converts [8, 9, 10, 12] into "8-10, 12"
+//Helper: Converts [8, 9, 10, 12] into "8-10, 12"
 export const formatLineRanges = (lines) => {
   if (!lines || lines.length === 0) return '';
   let ranges = [];
@@ -60,7 +60,7 @@ export const buildTreeData = (packagesArray, parentKey = '0') => {
   });
 };
 
-// NEW HELPER: Traverses the first branch of the tree to get folder keys
+//Helper: Traverses the first branch of the tree to get folder keys
 export const getFirstBranchKeys = (nodes, keys = []) => {
   if (!nodes || nodes.length === 0) return keys;
 
@@ -75,7 +75,7 @@ export const getFirstBranchKeys = (nodes, keys = []) => {
   return keys;
 };
 
-// NEW HELPER: Recursive function to flatten packages into a single list of files for the table
+//Helper: Recursive function to flatten packages into a single list of files for the table
 export const extractAllFiles = (packagesArray) => {
   let allFiles = [];
   packagesArray.forEach(pkg => {
