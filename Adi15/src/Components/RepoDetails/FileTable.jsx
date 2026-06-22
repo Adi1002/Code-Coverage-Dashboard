@@ -7,27 +7,8 @@ import {
 } from '@ant-design/icons';
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 const { Title, Text } = Typography;
+import {formatLineRanges} from '../../utils/calculations'
 
-// NEW HELPER: Converts [8, 9, 10, 12] into "8-10, 12"
-const formatLineRanges = (lines) => {
-  if (!lines || lines.length === 0) return '';
-  let ranges = [];
-  let start = lines[0];
-  let prev = lines[0];
-
-  for (let i = 1; i <= lines.length; i++) {
-    if (lines[i] === prev + 1) {
-      prev = lines[i];
-    } else {
-      if (start === prev) ranges.push(`${start}`);
-      else ranges.push(`${start}-${prev}`);
-
-      start = lines[i];
-      prev = lines[i];
-    }
-  }
-  return ranges.join(', ');
-};
 
 const FileTable = ({fileCoverage, id, searchText, highlightedFile}) => {
 

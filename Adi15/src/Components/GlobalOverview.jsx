@@ -61,7 +61,7 @@ const GlobalOverview = ({ globalSearch }) => {
                             latestTotalBranches: 0,
                             latestCoveredBranches: 0,
                             lastRunEpoch: 0,
-                            history: [] // Initializes once!
+                            history: []
                         };
                     }
 

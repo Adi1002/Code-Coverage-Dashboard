@@ -9,80 +9,9 @@ import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 import SummaryCards from './RepoDetails/SummaryCards';
 import FileTable from './RepoDetails/FileTable';
 import RunHistory from './RepoDetails/RunHistory';
+import {formatTrend, getColor, buildTreeData, getFirstBranchKeys, extractAllFiles} from '../utils/calculations'
 
 const { Title, Text } = Typography;
-
-// Helper: Format Trend Text (+/-)
-const formatTrend = (trend) => trend >= 0 ? `+${trend}%` : `${trend}%`;
-
-// Helper: Get Color based on coverage
-const getColor = (cov) => cov >= 80 ? '#22c55e' : (cov >= 50 ? '#f59e0b' : '#ef4444');
-
-// Helper: Recursive function to build the Ant Design Tree
-const buildTreeData = (packagesArray, parentKey = '0') => {
-  return packagesArray.map((pkg, index) => {
-    const currentKey = `${parentKey}-${index}`;
-
-    // 1. Recursively map sub-folders
-    const childrenPackages = pkg.subpackages ? buildTreeData(pkg.subpackages, currentKey) : [];
-
-    // 2. Map files as the "leaves" of the tree
-    const childrenFiles = pkg.files ? pkg.files.map((file, fIndex) => ({
-      // .split('/').pop() grabs just the file name (e.g., 'helpers.js') out of the long path!
-      title: file.filename.split('/').pop(),
-      key: file.filename,
-      icon: <FileOutlined />,
-      isLeaf: true,
-      // We attach the raw coverage data to the file node so we can use it later!
-      ...file
-    })) : [];
-
-    // 3. Return the Folder object containing all sub-folders and files
-    return {
-      title: pkg.name,
-      key: currentKey,
-      icon: <FolderOutlined />,
-      children: [...childrenPackages, ...childrenFiles]
-    };
-  });
-};
-
-// NEW HELPER: Traverses the first branch of the tree to get folder keys
-const getFirstBranchKeys = (nodes, keys = []) => {
-  if (!nodes || nodes.length === 0) return keys;
-
-  const firstNode = nodes[0]; // Always grab the first item
-
-  // If it's a folder (it has children and isn't a file leaf), save its key and go deeper!
-  if (!firstNode.isLeaf && firstNode.children) {
-    keys.push(firstNode.key);
-    return getFirstBranchKeys(firstNode.children, keys);
-  }
-
-  return keys;
-};
-
-// NEW HELPER: Recursive function to flatten packages into a single list of files for the table
-const extractAllFiles = (packagesArray) => {
-  let allFiles = [];
-  packagesArray.forEach(pkg => {
-    if (pkg.files) {
-      const mappedFiles = pkg.files.map((file) => ({
-        key: file.filename, // Use full path as a unique React key
-        filename: file.filename.split('/').pop(),
-        path: file.filename,
-        lineCoverage: file.line_coverage,
-        branchCoverage: `${file.branch_coverage}%`,
-        linesCV: `${file.lines_covered} / ${file.lines_valid}`,
-      }));
-      allFiles = [...allFiles, ...mappedFiles];
-    }
-    if (pkg.subpackages) {
-      allFiles = [...allFiles, ...extractAllFiles(pkg.subpackages)];
-    }
-  });
-  return allFiles;
-};
 
 
 const RepositoryDetails = () => {

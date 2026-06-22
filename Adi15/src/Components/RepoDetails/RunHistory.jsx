@@ -8,6 +8,7 @@ import {
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 const { Title, Text } = Typography;
 
+
 const RunHistory = ({ id }) => {
 
   const [runHistory, setRunHistory] = useState([]);
