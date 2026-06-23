@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      "http://ec2-100-24-9-250.compute-1.amazonaws.com:8000/data/repository"
+      "https://ec2-100-24-9-250.compute-1.amazonaws.com:8000/data/repository"
     );
 
     const data = await response.json();
