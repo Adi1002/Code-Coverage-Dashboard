@@ -36,7 +36,7 @@ const GlobalOverview = ({ globalSearch }) => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await fetch('https://100.24.9.250:8000/data/repository');
+                const response = await fetch('https://ec2-100-24-9-250.compute-1.amazonaws.com:8000/data/repository');
 
                 if (!response.ok) {
           // Throwing an error here triggers the catch block below
