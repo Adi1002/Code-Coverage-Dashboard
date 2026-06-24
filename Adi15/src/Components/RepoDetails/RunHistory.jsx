@@ -19,7 +19,8 @@ const RunHistory = ({ id }) => {
     const fetchRunHistory = async () => {
       setIsHistoryLoading(true);
       try {
-        const response = await fetch('/api/summary?repo=${id}');
+        const runhistoryUrl = `/api/summary?repo=${id}`;
+        const response = await fetch(runhistoryUrl);
         if (!response.ok) throw new Error("Failed to fetch run history");
 
         const allData = await response.json();
