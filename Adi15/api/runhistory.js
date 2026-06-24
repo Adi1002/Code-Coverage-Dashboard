@@ -9,7 +9,8 @@ export default async function handler(req, res) {
     }
 
     const url =
-      `http://13.127.42.153/codecoverage/dashboard/${repo}/packages`;
+      `http://13.127.42.153/codecoverage/dashboard/${repo}/summary`;
+      // http://13.127.42.153/codecoverage/dashboard/reports-service/uncovered?filename=<filename>
 
     const response = await fetch(url);
 
