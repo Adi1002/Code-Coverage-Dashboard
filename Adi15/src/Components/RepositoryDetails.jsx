@@ -55,7 +55,7 @@ const RepositoryDetails = () => {
         setIsLoading(true);
 
         // 1. The URLs (Make sure the proxy port matches your setup!)
-        const summaryUrl = `/codecoverage/dashboard/${id}/summary`; 
+        const summaryUrl = `/api/summary?repo=${id}`; 
         const packagesUrl = `/codecoverage/dashboard/${id}/packages`;
         
 
