@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 const { Title, Text } = Typography;
-
+import {formatLineRanges} from '../../utils/calculations'
 
 const RunHistory = ({ id }) => {
 
@@ -19,8 +19,7 @@ const RunHistory = ({ id }) => {
     const fetchRunHistory = async () => {
       setIsHistoryLoading(true);
       try {
-        const runhistoryUrl = `/api/summary?repo=${id}`;
-        const response = await fetch(runhistoryUrl);
+        const response = await fetch('/api/repository');
         if (!response.ok) throw new Error("Failed to fetch run history");
 
         const allData = await response.json();
