@@ -21,7 +21,7 @@ const FileTable = ({fileCoverage, id, searchText, highlightedFile}) => {
         setLoading(true);
         try {
           const safeFileName = encodeURIComponent(record.path);
-          const response = await fetch(`/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`);
+          const response = await fetch(`/api/uncovered?repo=${repoId}&filename=${safeFileName}`);
           if (!response.ok) throw new Error("Failed to fetch");
     
           const data = await response.json();
