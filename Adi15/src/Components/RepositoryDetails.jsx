@@ -10,7 +10,6 @@ import SummaryCards from './RepoDetails/SummaryCards';
 import FileTable from './RepoDetails/FileTable';
 import RunHistory from './RepoDetails/RunHistory';
 import {formatTrend, getColor, buildTreeData, getFirstBranchKeys, extractAllFiles} from '../utils/calculations'
-
 const { Title, Text } = Typography;
 
 
@@ -56,7 +55,7 @@ const RepositoryDetails = () => {
 
         // 1. The URLs (Make sure the proxy port matches your setup!)
         const summaryUrl = `/api/summary?repo=${id}`; 
-        const packagesUrl = `/codecoverage/dashboard/${id}/packages`;
+        const packagesUrl = `/api/packages?repo=${id}`;
         
 
         // 2. Fetch the working endpoints
