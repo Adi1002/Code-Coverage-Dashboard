@@ -22,12 +22,15 @@ const DistributionBarChart = ({ data }) => {
                         <Legend verticalAlign="top" height={36} iconType="circle" wrapperStyle={{ paddingBottom: '20px' }} />
 
                         {/* Metric 1: Line Coverage stays as a solid Bar */}
-                        <Bar
+                        <Line
+                            type="monotone"
                             dataKey="line_count"
                             name="Line Coverage"
-                            fill="#6366f1"
-                            radius={[4, 4, 0, 0]}
-                            barSize={32}
+                            stroke="#6366f1"
+                            strokeWidth={3}
+                            //dot={{ r: 4, fill: '#22c55e', strokeWidth: 2, stroke: '#fff' }}
+                            dot = {false}
+                            activeDot={{ r: 6 }}
                         />
 
                         {/* Metric 2: Branch Coverage becomes a smooth Line floating over the bars! */}
