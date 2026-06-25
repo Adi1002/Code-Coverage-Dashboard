@@ -29,7 +29,6 @@ const PackageTree = () => {
                                   dataKey="branch_count"
                                   name="Branch Coverage"
                                   fill="#22c55e"
-                                  dot = {false}
                                   radius={[4, 4, 0, 0]}
                                   barSize={20}
                               />
