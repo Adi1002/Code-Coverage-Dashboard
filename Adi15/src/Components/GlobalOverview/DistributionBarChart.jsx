@@ -15,7 +15,7 @@ const DistributionBarChart = ({ data }) => {
                     
 
                     {/* NEW: Use ComposedChart instead of BarChart */}
-                    <ComposedChart data={distributionData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <ComposedChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                         <XAxis dataKey="range" tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} />
                         <YAxis tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} />
                         <Tooltip cursor={{ fill: '#f1f5f9' }} />
@@ -23,7 +23,7 @@ const DistributionBarChart = ({ data }) => {
 
                         {/* Metric 1: Line Coverage stays as a solid Bar */}
                         <Bar
-                            dataKey="line"
+                            dataKey="line_count"
                             name="Line Coverage"
                             fill="#6366f1"
                             radius={[4, 4, 0, 0]}
@@ -33,7 +33,7 @@ const DistributionBarChart = ({ data }) => {
                         {/* Metric 2: Branch Coverage becomes a smooth Line floating over the bars! */}
                         <Line
                             type="monotone"
-                            dataKey="branch"
+                            dataKey="branch_count"
                             name="Branch Coverage"
                             stroke="#22c55e"
                             strokeWidth={3}
