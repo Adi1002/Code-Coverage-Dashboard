@@ -40,8 +40,8 @@ const DistributionBarChart = ({ data }) => {
                             name="Branch Coverage"
                             stroke="#22c55e"
                             strokeWidth={3}
-                            dot={{ r: 4, fill: '#22c55e', strokeWidth: 2, stroke: '#fff' }}
-                            //dot = {false}
+                            //dot={{ r: 4, fill: '#22c55e', strokeWidth: 2, stroke: '#fff' }}
+                            dot = {false}
                             activeDot={{ r: 6 }}
                         />
                     </ComposedChart>
