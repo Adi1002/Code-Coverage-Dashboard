@@ -6,6 +6,22 @@ import DashboardLayout from './Components/DashboardLayout';
 import GlobalOverview from './Components/GlobalOverview';
 import RepositoryDetails from './Components/RepositoryDetails';
 import ErrorBoundary from './Components/ErrorBoundary';
+import Login from './Components/Login';
+
+// 1. Create a "Guard" component
+const ProtectedRoute = ({ children }) => {
+  // Check if the JWT we saved during login exists
+  const isAuthenticated = localStorage.getItem('enboarder_jwt');
+  
+  if (!isAuthenticated) {
+    // If no token, kick them back to the login screen
+    return <Navigate to="/login" replace />;
+  }
+  
+  // If they have a token, let them see the dashboard!
+  return children;
+};
+
 
 function App() {
 
@@ -15,19 +31,27 @@ function App() {
   return (
     <ErrorBoundary>
     <BrowserRouter>
-      {/* 2. The Layout Shell wraps ALL routes */}
-      <DashboardLayout setGlobalSearch={setGlobalSearch}>
+      <Routes>
+          
+          {/* ROUTE 1: Public Login Page (No Navbar or Footer) */}
+          <Route path="/login" element={<Login />} />
 
-        {/* 3. The Router swaps the pages right in the {children} spot! */}
-        <Routes>
-          {/* Route 1: The Home Page (Your Dashboard) */}
-          <Route path="/" element={<GlobalOverview globalSearch={globalSearch} />} />
+          {/* ROUTE 2: Protected Dashboard Routes (Wrapped in Layout + Guard) */}
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout setGlobalSearch={setGlobalSearch}>
+                  <Routes>
+                    <Route path="/" element={<GlobalOverview globalSearch={globalSearch} />} />
+                    <Route path="/repository/:id" element={<RepositoryDetails />} />
+                  </Routes>
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
 
-          {/* Route 2: The Details Page */}
-          <Route path="/repository/:id" element={<RepositoryDetails />} />
         </Routes>
-
-      </DashboardLayout>
     </BrowserRouter>
     </ErrorBoundary>
   )
