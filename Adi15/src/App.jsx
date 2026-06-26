@@ -31,27 +31,19 @@ function App() {
   return (
     <ErrorBoundary>
     <BrowserRouter>
-      <Routes>
-          
-          {/* ROUTE 1: Public Login Page (No Navbar or Footer) */}
-          <Route path="/login" element={<Login />} />
+      {/* 2. The Layout Shell wraps ALL routes */}
+      <DashboardLayout setGlobalSearch={setGlobalSearch}>
 
-          {/* ROUTE 2: Protected Dashboard Routes (Wrapped in Layout + Guard) */}
-          <Route
-            path="/*"
-            element={
-              <ProtectedRoute>
-                <DashboardLayout setGlobalSearch={setGlobalSearch}>
-                  <Routes>
-                    <Route path="/" element={<GlobalOverview globalSearch={globalSearch} />} />
-                    <Route path="/repository/:id" element={<RepositoryDetails />} />
-                  </Routes>
-                </DashboardLayout>
-              </ProtectedRoute>
-            }
-          />
+        {/* 3. The Router swaps the pages right in the {children} spot! */}
+        <Routes>
+          {/* Route 1: The Home Page (Your Dashboard) */}
+          <Route path="/" element={<GlobalOverview globalSearch={globalSearch} />} />
 
+          {/* Route 2: The Details Page */}
+          <Route path="/repository/:id" element={<RepositoryDetails />} />
         </Routes>
+
+      </DashboardLayout>
     </BrowserRouter>
     </ErrorBoundary>
   )
