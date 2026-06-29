@@ -54,8 +54,8 @@ const RepositoryDetails = () => {
         setIsLoading(true);
 
         // 1. The URLs (Make sure the proxy port matches your setup!)
-        const summaryUrl = `/api/summary?repo=${id}`;
-        const packagesUrl = `/api/packages?repo=${id}`;
+        //const summaryUrl = `/api/summary?repo=${id}`;
+        //const packagesUrl = `/api/packages?repo=${id}`;
         
 
         // 2. Fetch the working endpoints
