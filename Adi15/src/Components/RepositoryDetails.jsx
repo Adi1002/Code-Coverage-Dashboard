@@ -55,7 +55,6 @@ const RepositoryDetails = () => {
 
         // 1. The URLs (Make sure the proxy port matches your setup!)
         const summaryUrl = `/api/summary?repo=${id}`;
-        https://13.127.42.153/codecoverage/dashboard/reports-service/summary
         const packagesUrl = `/api/packages?repo=${id}`;
         
 
