@@ -54,14 +54,15 @@ const RepositoryDetails = () => {
         setIsLoading(true);
 
         // 1. The URLs (Make sure the proxy port matches your setup!)
-        const summaryUrl = `/api/summary?repo=${id}`; 
+        const summaryUrl = `/api/summary?repo=${id}`;
+        https://13.127.42.153/codecoverage/dashboard/reports-service/summary
         const packagesUrl = `/api/packages?repo=${id}`;
         
 
         // 2. Fetch the working endpoints
         const [summaryRes, packagesRes] = await Promise.all([
-          fetch(summaryUrl),
-          fetch(packagesUrl)
+          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/summary`),
+          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/packages`)
         ]);
 
         if (!summaryRes.ok || !packagesRes.ok) {
