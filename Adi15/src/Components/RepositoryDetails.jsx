@@ -52,17 +52,19 @@ const RepositoryDetails = () => {
     const fetchAllRepoData = async () => {
       try {
         setIsLoading(true);
-
-        // 1. The URLs (Make sure the proxy port matches your setup!)
-        //const summaryUrl = `/api/summary?repo=${id}`;
-        //const packagesUrl = `/api/packages?repo=${id}`;
         
-
         // 2. Fetch the working endpoints
         const [summaryRes, packagesRes] = await Promise.all([
-          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/summary`),
-          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/packages`)
+          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/summary`, {credentials: 'include'}),
+          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/packages`, {credentials: 'include'})
         ]);
+
+        // 2. The Mid-Session Expiration Check
+  if (response.status === 401) {
+    // If token expired, force them back to login instantly
+    window.location.href = '/login'; 
+    return; // Stop running the rest of the code
+  }
 
         if (!summaryRes.ok || !packagesRes.ok) {
           throw new Error("Failed to fetch one or more data endpoints");

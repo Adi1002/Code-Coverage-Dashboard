@@ -21,7 +21,15 @@ const FileTable = ({fileCoverage, id, searchText, highlightedFile}) => {
         setLoading(true);
         try {
           const safeFileName = encodeURIComponent(record.path);
-          const response = await fetch(`https://13.127.42.153/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`);
+          const response = await fetch(`https://13.127.42.153/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`, {credentials: 'include'});
+
+          // 2. The Mid-Session Expiration Check
+  if (response.status === 401) {
+    // If token expired, force them back to login instantly
+    window.location.href = '/login'; 
+    return; // Stop running the rest of the code
+  }
+  
           if (!response.ok) throw new Error("Failed to fetch");
     
           const data = await response.json();

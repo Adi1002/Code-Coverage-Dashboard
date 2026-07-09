@@ -36,7 +36,14 @@ const GlobalOverview = ({ globalSearch }) => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await fetch('https://100.24.9.250:8000/data/repository');
+                const response = await fetch('https://100.24.9.250:8000/data/repository', {credentials: 'include'});
+
+                // 2. The Mid-Session Expiration Check
+  if (response.status === 401) {
+    // If token expired, force them back to login instantly
+    window.location.href = '/login'; 
+    return; // Stop running the rest of the code
+  }
 
                 if (!response.ok) {
           // Throwing an error here triggers the catch block below

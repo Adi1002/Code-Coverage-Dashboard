@@ -1,27 +1,52 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
-import { Button } from 'antd';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Button, Spin } from 'antd';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import DashboardLayout from './Components/DashboardLayout';
 import GlobalOverview from './Components/GlobalOverview';
 import RepositoryDetails from './Components/RepositoryDetails';
 import ErrorBoundary from './Components/ErrorBoundary';
 import Login from './Components/Login';
 
-// 1. Create a "Guard" component
+// The Upgraded Route Guard (Option B: API Verification)
 const ProtectedRoute = ({ children }) => {
-  // Check if the JWT we saved during login exists
-  const isAuthenticated = localStorage.getItem('enboarder_jwt');
-  
-  if (!isAuthenticated) {
-    // If no token, kick them back to the login screen
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    const verifyAuth = async () => {
+      try {
+        const response = await fetch('https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/me', {
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Auth verification failed:", error);
+        setIsAuthenticated(false);
+      }
+    };
+
+    verifyAuth();
+  }, []);
+
+  if (isAuthenticated === null) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f8fafc' }}>
+        <Spin size="large" tip="Verifying secure session..." />
+      </div>
+    );
+  }
+
+  if (isAuthenticated === false) {
     return <Navigate to="/login" replace />;
   }
-  
-  // If they have a token, let them see the dashboard!
+
   return children;
 };
-
 
 function App() {
 
@@ -30,23 +55,26 @@ function App() {
 
   return (
     <ErrorBoundary>
-    <BrowserRouter>
-      {/* 2. The Layout Shell wraps ALL routes */}
-      <DashboardLayout setGlobalSearch={setGlobalSearch}>
-
-        {/* 3. The Router swaps the pages right in the {children} spot! */}
+      <BrowserRouter>
         <Routes>
-          {/* Route 1: The Home Page (Your Dashboard) */}
-          <Route path="/" element={<GlobalOverview globalSearch={globalSearch} />} />
-
-          {/* Route 2: The Details Page */}
-          <Route path="/repository/:id" element={<RepositoryDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout setGlobalSearch={setGlobalSearch}>
+                  <Routes>
+                    <Route path="/" element={<GlobalOverview globalSearch={globalSearch} />} />
+                    <Route path="/repository/:id" element={<RepositoryDetails />} />
+                  </Routes>
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-
-      </DashboardLayout>
-    </BrowserRouter>
+      </BrowserRouter>
     </ErrorBoundary>
-  )
-}
+  );
+};
 
 export default App
