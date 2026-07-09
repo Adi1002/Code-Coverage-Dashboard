@@ -7,60 +7,60 @@ import {
 } from '@ant-design/icons';
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 const { Title, Text } = Typography;
-import {formatLineRanges} from '../../utils/calculations'
+import { formatLineRanges } from '../../utils/calculations'
 
 
-const FileTable = ({fileCoverage, id, searchText, highlightedFile}) => {
+const FileTable = ({ fileCoverage, id, searchText, highlightedFile }) => {
 
-    
-    const UncoveredLinesCell = ({ record, repoId }) => {
-      const [loading, setLoading] = useState(false);
-      const [linesString, setLinesString] = useState(null);
-    
-      const fetchUncovered = async () => {
-        setLoading(true);
-        try {
-          const safeFileName = encodeURIComponent(record.path);
-          const response = await fetch(`https://13.127.42.153/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`, {credentials: 'include'});
 
-          // 2. The Mid-Session Expiration Check
-  if (response.status === 401) {
-    // If token expired, force them back to login instantly
-    window.location.href = '/login'; 
-    return; // Stop running the rest of the code
-  }
-  
-          if (!response.ok) throw new Error("Failed to fetch");
-    
-          const data = await response.json();
-    
-          if (data.uncovered_count === 0) {
-            setLinesString("100% Covered");
-          } else {
-            setLinesString(formatLineRanges(data.uncovered_lines));
-          }
-        } catch (error) {
-          console.error("Error fetching uncovered lines:", error);
-          setLinesString("Error loading");
+  const UncoveredLinesCell = ({ record, repoId }) => {
+    const [loading, setLoading] = useState(false);
+    const [linesString, setLinesString] = useState(null);
+
+    const fetchUncovered = async () => {
+      setLoading(true);
+      try {
+        const safeFileName = encodeURIComponent(record.path);
+        const response = await fetch(`https://13.127.42.153/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`, { credentials: 'include' });
+
+        // 2. The Mid-Session Expiration Check
+        if (response.status === 401) {
+          // If token expired, force them back to login instantly
+          window.location.href = 'https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/login';
+          return; // Stop running the rest of the code
         }
-        setLoading(false);
-      };
-    
-      // If we have the data, show the string. Otherwise, show the load button.
-      if (linesString) {
-        return (
-          <Text style={{ color: linesString === "100% Covered" ? '#22c55e' : '#ef4444', fontSize: '13px' }}>
-            {linesString}
-          </Text>
-        );
+
+        if (!response.ok) throw new Error("Failed to fetch");
+
+        const data = await response.json();
+
+        if (data.uncovered_count === 0) {
+          setLinesString("100% Covered");
+        } else {
+          setLinesString(formatLineRanges(data.uncovered_lines));
+        }
+      } catch (error) {
+        console.error("Error fetching uncovered lines:", error);
+        setLinesString("Error loading");
       }
-    
-      return (
-        <Button size="small" type="dashed" loading={loading} onClick={fetchUncovered}>
-          Load Lines
-        </Button>
-      );
+      setLoading(false);
     };
+
+    // If we have the data, show the string. Otherwise, show the load button.
+    if (linesString) {
+      return (
+        <Text style={{ color: linesString === "100% Covered" ? '#22c55e' : '#ef4444', fontSize: '13px' }}>
+          {linesString}
+        </Text>
+      );
+    }
+
+    return (
+      <Button size="small" type="dashed" loading={loading} onClick={fetchUncovered}>
+        Load Lines
+      </Button>
+    );
+  };
 
   const fileColumns = [
     {
@@ -118,47 +118,47 @@ const FileTable = ({fileCoverage, id, searchText, highlightedFile}) => {
 
   return (
     <Card
-              variant={false}
-              style={{ borderRadius: '8px', minHeight: '300px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
-            >
-              {/* Header with Title and Legend */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
-                <div>
-                  <Title level={4} style={{ margin: 0 }}>File Level Coverage</Title>
-                  <Text type="secondary" style={{ fontSize: '13px' }}>
-                    Listing {fileCoverage.length} files in <strong>{id}</strong>
-                  </Text>
-                </div>
-                <Space size="middle">
-                  <Badge color="#ef4444" text={<Text type="secondary" style={{ fontSize: '12px' }}>Danger (&lt;50%)</Text>} />
-                  <Badge color="#f59e0b" text={<Text type="secondary" style={{ fontSize: '12px' }}>Warning (50-70%)</Text>} />
-                  <Badge color="#eab308" text={<Text type="secondary" style={{ fontSize: '12px' }}>Caution (70-80%)</Text>} />
-                  <Badge color="#22c55e" text={<Text type="secondary" style={{ fontSize: '12px' }}>Good (&gt;80%)</Text>} />
-                </Space>
-              </div>
+      variant={false}
+      style={{ borderRadius: '8px', minHeight: '300px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
+    >
+      {/* Header with Title and Legend */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+        <div>
+          <Title level={4} style={{ margin: 0 }}>File Level Coverage</Title>
+          <Text type="secondary" style={{ fontSize: '13px' }}>
+            Listing {fileCoverage.length} files in <strong>{id}</strong>
+          </Text>
+        </div>
+        <Space size="middle">
+          <Badge color="#ef4444" text={<Text type="secondary" style={{ fontSize: '12px' }}>Danger (&lt;50%)</Text>} />
+          <Badge color="#f59e0b" text={<Text type="secondary" style={{ fontSize: '12px' }}>Warning (50-70%)</Text>} />
+          <Badge color="#eab308" text={<Text type="secondary" style={{ fontSize: '12px' }}>Caution (70-80%)</Text>} />
+          <Badge color="#22c55e" text={<Text type="secondary" style={{ fontSize: '12px' }}>Good (&gt;80%)</Text>} />
+        </Space>
+      </div>
 
-              {/* NEW: A quick CSS block to define our custom highlight color */}
-              <style>{`
+      {/* NEW: A quick CSS block to define our custom highlight color */}
+      <style>{`
                 .highlight-row > td {
                   background-color: #f0f0f2 !important; /* A soft indigo highlight */
                   transition: background-color 0.3s ease;
                 }
               `}</style>
 
-              <Table
-                columns={fileColumns}
+      <Table
+        columns={fileColumns}
 
-                // NEW: Filter the data dynamically!
-                dataSource={fileCoverage.filter(file =>
-                  file.filename.toLowerCase().includes(searchText.toLowerCase())
-                )}
+        // NEW: Filter the data dynamically!
+        dataSource={fileCoverage.filter(file =>
+          file.filename.toLowerCase().includes(searchText.toLowerCase())
+        )}
 
-                rowClassName={(record) => record.key === highlightedFile ? 'highlight-row' : ''}
+        rowClassName={(record) => record.key === highlightedFile ? 'highlight-row' : ''}
 
-                pagination={false}
-                scroll={{ x: 700, y: 400 }}
-              />
-            </Card>
+        pagination={false}
+        scroll={{ x: 700, y: 400 }}
+      />
+    </Card>
   )
 }
 
