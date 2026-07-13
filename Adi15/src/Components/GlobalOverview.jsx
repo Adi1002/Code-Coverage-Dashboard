@@ -36,7 +36,7 @@ const GlobalOverview = ({ globalSearch }) => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await fetch('https://100.24.9.250:8000/data/repository', {credentials: 'include'});
+                const response = await fetch('https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/data/repository', {credentials: 'include'});
 
                 // 2. The Mid-Session Expiration Check
   if (response.status === 401) {
