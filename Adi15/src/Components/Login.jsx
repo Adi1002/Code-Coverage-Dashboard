@@ -11,7 +11,7 @@ const Login = () => {
     setIsLoading(true);
     // 1. Redirect the entire browser tab to your backend API!
     // Make sure to ask the backend team for the EXACT URL.
-    window.location.href = 'https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/login'; 
+    window.location.href = 'https://100.24.9.250:8000/auth/login'; 
   };
 
   return (

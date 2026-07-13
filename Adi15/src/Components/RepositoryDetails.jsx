@@ -34,20 +34,6 @@ const RepositoryDetails = () => {
   const [expandedKeys, setExpandedKeys] = useState([]);
 
   useEffect(() => {
-    async function testCookie() {
-      const res = await fetch(
-        "https://100.24.9.250:8000/test",
-        {
-          credentials: "include",
-        }
-      );
-
-      console.log(await res.json());
-    }
-
-    testCookie();
-  }, []);
-  
 
   // NEW: Auto-scroll to the highlighted file in the table
   useEffect(() => {
@@ -76,7 +62,7 @@ const RepositoryDetails = () => {
 
         // 2. The Mid-Session Expiration Check
   if (summaryRes.status === 401 || packagesRes.status === 401) {
-  window.location.href = 'https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/login';
+  window.location.href = 'https://100.24.9.250:8000/auth/login';
   return;
 }
 
