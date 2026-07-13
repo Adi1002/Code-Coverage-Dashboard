@@ -60,11 +60,10 @@ const RepositoryDetails = () => {
         ]);
 
         // 2. The Mid-Session Expiration Check
-  if (response.status === 401) {
-    // If token expired, force them back to login instantly
-    window.location.href = 'https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/login'; 
-    return; // Stop running the rest of the code
-  }
+  if (summaryRes.status === 401 || packagesRes.status === 401) {
+  window.location.href = 'https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/login';
+  return;
+}
 
         if (!summaryRes.ok || !packagesRes.ok) {
           throw new Error("Failed to fetch one or more data endpoints");
