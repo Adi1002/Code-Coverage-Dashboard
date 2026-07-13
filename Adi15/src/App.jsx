@@ -15,9 +15,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await fetch('https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/me', {
-          credentials: 'include',
-        });
+        const response = await fetch('https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/me', {credentials: 'include'});
 
         if (response.ok) {
           setIsAuthenticated(true);
