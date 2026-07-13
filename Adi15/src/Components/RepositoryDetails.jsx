@@ -32,6 +32,21 @@ const RepositoryDetails = () => {
   const [searchText, setSearchText] = useState('');
   const [highlightedFile, setHighlightedFile] = useState(null);
   const [expandedKeys, setExpandedKeys] = useState([]);
+
+  useEffect(() => {
+    async function testCookie() {
+      const res = await fetch(
+        "https://100.24.9.250:8000/data/repository/test",
+        {
+          credentials: "include",
+        }
+      );
+
+      console.log(await res.json());
+    }
+
+    testCookie();
+  }, []);
   
 
   // NEW: Auto-scroll to the highlighted file in the table
