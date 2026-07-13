@@ -36,7 +36,7 @@ const RepositoryDetails = () => {
   useEffect(() => {
     async function testCookie() {
       const res = await fetch(
-        "https://100.24.9.250:8000/data/repository/test",
+        "https://100.24.9.250:8000/test",
         {
           credentials: "include",
         }
