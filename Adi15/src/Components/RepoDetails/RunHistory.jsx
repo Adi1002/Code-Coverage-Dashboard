@@ -19,7 +19,7 @@ const RunHistory = ({ id }) => {
     const fetchRunHistory = async () => {
       setIsHistoryLoading(true);
       try {
-        const response = await fetch('https://100.24.9.250:8000/data/repository');
+        const response = await fetch('https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/data/repository');
         if (!response.ok) throw new Error("Failed to fetch run history");
 
         const allData = await response.json();

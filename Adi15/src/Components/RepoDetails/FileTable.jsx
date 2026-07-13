@@ -21,7 +21,7 @@ const FileTable = ({ fileCoverage, id, searchText, highlightedFile }) => {
       setLoading(true);
       try {
         const safeFileName = encodeURIComponent(record.path);
-        const response = await fetch(`https://13.127.42.153/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`, { credentials: 'include' });
+        const response = await fetch(`https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/codecoverage/dashboard/${repoId}/uncovered?filename=${safeFileName}`, { credentials: 'include' });
 
         // 2. The Mid-Session Expiration Check
         if (response.status === 401) {
