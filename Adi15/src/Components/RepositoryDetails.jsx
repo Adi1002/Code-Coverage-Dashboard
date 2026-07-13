@@ -54,8 +54,8 @@ const RepositoryDetails = () => {
         
         // 2. Fetch the working endpoints
         const [summaryRes, packagesRes] = await Promise.all([
-          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/summary`, {credentials: 'include'}),
-          fetch(`https://13.127.42.153/codecoverage/dashboard/${id}/packages`, {credentials: 'include'})
+          fetch(`https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/codecoverage/dashboard/${id}/summary`, {credentials: 'include'}),
+          fetch(`https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/codecoverage/dashboard/${id}/packages`, {credentials: 'include'})
         ]);
 
         // 2. The Mid-Session Expiration Check
