@@ -32,9 +32,7 @@ const RepositoryDetails = () => {
   const [searchText, setSearchText] = useState('');
   const [highlightedFile, setHighlightedFile] = useState(null);
   const [expandedKeys, setExpandedKeys] = useState([]);
-
-  useEffect(() => {
-
+    
   // NEW: Auto-scroll to the highlighted file in the table
   useEffect(() => {
     if (highlightedFile) {
