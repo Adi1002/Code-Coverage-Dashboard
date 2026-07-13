@@ -41,7 +41,7 @@ const GlobalOverview = ({ globalSearch }) => {
                 // 2. The Mid-Session Expiration Check
   if (response.status === 401) {
     // If token expired, force them back to login instantly
-    window.location.href = 'https://100.24.9.250:8000/auth/login'; 
+    window.location.href = 'https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/auth/login'; 
     return; // Stop running the rest of the code
   }
 
