@@ -42,6 +42,16 @@ Instead of checking coverage reports individually across repositories, this dash
 
 ---
 
+## 🌐 Live Demo
+
+The application is deployed and can be accessed here:
+
+**Dashboard:**  
+https://ec2-13-127-42-153.ap-south-1.compute.amazonaws.com/
+
+> **Note:** You can sign in using your Google account to access the dashboard.
+
+
 ## 🛠️ Tech Stack
 
 ### Frontend
